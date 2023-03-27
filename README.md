@@ -1,0 +1,1 @@
+iterate through all the tags and get their strings

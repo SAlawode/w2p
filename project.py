@@ -2,7 +2,7 @@ import library
 
 
 def main():
-    convert_html_to_pdf(get_url())
+    print(validate_url(get_url()))
 
 
 
@@ -16,28 +16,41 @@ def get_url():
 
 def validate_url(url):
     """
-    Use regex to verify the url given by the user
-    return: a bool. True or False
+    checks if it's a correct url format
     """
-    pattern = llibrary.re.compile(r'^https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+[/\w]*\??(?:[-\w.&=]+)?')
+
+
+    pattern = library.re.compile(r'^(http(s)?://)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(/[a-zA-Z0-9-]+)*(\?[a-zA-Z0-9-_=]+)?')
+
 
     # Use the pattern to match the input URL
-    match = pattern.match(url)
+  
+    if not pattern.match(url):
+        validate_url(get_url())
 
-    # Return True if the URL matches the pattern, False otherwise
-    return bool(match)
+    return True
 
 def verify_url(url):
-    if validate_url:
-        response = library.requests.head(url)
-        return response.status_code == 200
+    """
+    Checks if the url actually points to somewhere
+    """
+    while True:
+        if validate_url(url):
+            try:
+                response = library.requests.head(url)
+                return response.status_code == 200
+            except:
+                return False
 
 
 def get_title(url):
     # Getting the webpage
-    if verify_url:
-        r = library.requests.get(url)
-        soup = library.BeautifulSoup(r.content, 'html.parser')
+    if verify_url(url):
+        try:
+            r = library.requests.get(url)
+            soup = library.BeautifulSoup(r.content, 'html.parser')
+        except:
+            get_title(url)
 
     try:
         output_path = soup.title.string + ".pdf"
