@@ -19,7 +19,7 @@ def main():
     'margin-bottom': '0mm',
     'margin-left': '0mm',
     }
-
+ 
     # Convert the website to a PDF file using pdfkit
     library.pdfkit.from_url(url, output_path, options=options)
 
