@@ -1,0 +1,10 @@
+The following are required for the code to run effectively
+
+pip install requests 
+pip install bs4
+pip install pdfkit
+wkhtmltopdf: The pdfkit library is a wrapper around the wkhtmltopdf library,
+            which is used to convert HTML to PDF. You need to install wkhtmltopdf
+             separately on your system. You can download the installer for your 
+             operating system from the wkhtmltopdf website: 
+             https://wkhtmltopdf.org/downloads.html https://wkhtmltopdf.org/downloads.html
